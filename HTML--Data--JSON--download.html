@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>&nbsp;</title>
+    <meta charset=utf-8>
+</head>
+
+<body>
+
+    <table>
+        <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+        </tr>
+        <tr>
+            <td>Line #1</td>
+            <td>SLTD</td>
+            <td>32</td>
+        </tr>
+        <tr>
+            <td>Line #2</td>
+            <td>MKTD</td>
+            <td>68</td>
+        </tr>
+        <tr>
+            <td>Line #3</td>
+            <td>LRTD</td>
+            <td>55</td>
+        </tr>
+        <tr>
+            <td>Line #4</td>
+            <td>HAD</td>
+            <td>47</td>
+        </tr>
+    </table>
+
+    <button>Export to text file</button>
+
+    <script>
+
+        var button = document.getElementsByTagName("button")[0];
+
+        button.addEventListener("click", function() {
+           var saveData = (function () {
+		var a = document.createElement("a");
+
+		return function (data, fileName) {
+    		var json = JSON.stringify(data),
+        	blob = new Blob([json], {type: "octet/stream"}),
+        	url = window.URL.createObjectURL(blob);
+   		a.href = url;
+    		a.download = fileName;
+    		a.click();
+    		window.URL.revokeObjectURL(url);
+		};
+	}());
+
+	//var data = { x: 42, s: "hello, world", d: new Date() },
+	var data = { d: 546582, B: "why", z: "welllndsmdksd" },
+    	fileName = "my-download.json";
+
+	saveData(data, fileName);
+        });
+    </script>
+
+</body>
+
+</html>
